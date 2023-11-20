@@ -3,7 +3,7 @@ import React, { useState } from "react";
 interface DropDownProp {
   options: string[];
 }
-const DropDown: React.FC<DropDownProp> = ({ options }) => {
+const DropDown = ({ options }: DropDownProp) => {
   const [selectedOption, setSelectedOption] = useState<string>("");
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
