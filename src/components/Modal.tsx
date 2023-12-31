@@ -5,9 +5,16 @@ interface ModalProps {
   onClose: () => void;
   options: string[];
   onModalChange: (value: string) => void;
+  onTaskStatusChange: (value: string) => void;
 }
-const Modal = ({ show, onClose, options, onModalChange }: ModalProps) => {
-  const [selectedOption, setSelectedOption] = useState("");
+const Modal = ({
+  show,
+  onClose,
+  options,
+  onModalChange,
+  onTaskStatusChange,
+}: ModalProps) => {
+  const [selectedOption, setSelectedOption] = useState("incomplete");
   const [inputValue, setInputValue] = useState("");
   const handleChangeDropDown = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -24,7 +31,9 @@ const Modal = ({ show, onClose, options, onModalChange }: ModalProps) => {
   const handlTaskAdding = () => {
     if (inputValue !== "") {
       onModalChange(inputValue);
+      onTaskStatusChange(selectedOption);
       setInputValue("");
+      onClose();
     }
   };
   if (!show) {

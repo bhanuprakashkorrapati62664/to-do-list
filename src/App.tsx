@@ -8,6 +8,8 @@ function App() {
   const options = ["All", "incomplete", "Completed"];
   const [showModal, setShowModal] = useState(false);
   const [modalData, setModalData] = useState("");
+  const [taskStatus, setTaskStatus] = useState("");
+  const [taskNotify, setTaskNotify] = useState("");
   const handleOpenModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
   return (
@@ -19,9 +21,10 @@ function App() {
         onClose={handleCloseModal}
         options={options}
         onModalChange={setModalData}
+        onTaskStatusChange={setTaskStatus}
       />
-      <DropDown options={options} />
-      <Todos modalData={modalData} />
+      <DropDown options={options} notifyTaskStatus={setTaskNotify} />
+      <Todos modalData={modalData} taskStatus={taskStatus} notifyTaskStatus={taskNotify} />
     </>
   );
 }
