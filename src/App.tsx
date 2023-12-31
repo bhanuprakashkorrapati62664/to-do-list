@@ -3,6 +3,7 @@ import DropDown from "./components/DropDown";
 import Heading from "./components/Heading";
 import Modal from "./components/Modal";
 import Todos from "./components/Todos";
+import "./App.css";
 
 function App() {
   const options = ["All", "incomplete", "Completed"];
@@ -14,7 +15,7 @@ function App() {
   const handleCloseModal = () => setShowModal(false);
   return (
     <>
-      <Heading />
+      <Heading className="heading" />
       <button onClick={handleOpenModal}>Add task</button>
       <Modal
         show={showModal}
@@ -24,7 +25,11 @@ function App() {
         onTaskStatusChange={setTaskStatus}
       />
       <DropDown options={options} notifyTaskStatus={setTaskNotify} />
-      <Todos modalData={modalData} taskStatus={taskStatus} notifyTaskStatus={taskNotify} />
+      <Todos
+        modalData={modalData}
+        taskStatus={taskStatus}
+        notifyTaskStatus={taskNotify}
+      />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "../styles/Modal.module.css";
 
 interface ModalProps {
   show: boolean;
@@ -40,24 +41,28 @@ const Modal = ({
     return null;
   }
   return (
-    <div>
-      <div>
-        <button onClick={onClose}>X</button>
-        <h1>ADD TODO</h1>
-        <p>Title</p>
-        <input value={inputValue} onChange={handleChangeInputField} />
-        <select value={selectedOption} onChange={handleChangeDropDown}>
-          {options.map((option, index) =>
-            option !== "All" ? (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ) : (
-              ""
-            )
-          )}
-        </select>
-        <div>
+    <div className={styles.modalBackdrop}>
+      <div className={styles.modalContent}>
+        <button className={styles.closeButton} onClick={onClose}>
+          X
+        </button>
+        <div className={styles.modalHeader}>
+          <h1>ADD TODO</h1>
+        </div>
+        <div className={styles.modalBody}>
+          <p>Title</p>
+          <input value={inputValue} onChange={handleChangeInputField} />
+          <select value={selectedOption} onChange={handleChangeDropDown}>
+            {options.map((option, index) =>
+              option !== "All" ? (
+                <option key={index} value={option}>
+                  {option}
+                </option>
+              ) : null
+            )}
+          </select>
+        </div>
+        <div className={styles.modalFooter}>
           <button onClick={handlTaskAdding}>Add Task</button>
           <button onClick={onClose}>Cancel</button>
         </div>

@@ -1,7 +1,10 @@
-const Heading = () => {
+interface HeadingProp {
+  className: string;
+}
+const Heading = ({ className }: HeadingProp) => {
   return (
     <>
-      <h1>ToDo List</h1>
+      <h1 className={className}>ToDo List</h1>
     </>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from "../styles/DropDown.module.css";
 
 interface DropDownProp {
   options: string[];
@@ -13,7 +14,11 @@ const DropDown = ({ options, notifyTaskStatus }: DropDownProp) => {
   };
   return (
     <>
-      <select value={selectedOption} onChange={handleChange}>
+      <select
+        className={styles.dropdown}
+        value={selectedOption}
+        onChange={handleChange}
+      >
         {options.map((option, index) => (
           <option key={index} value={option}>
             {option}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import styles from "../styles/Todos.module.css";
 
 interface TodoItem {
   text: string;
@@ -30,7 +31,7 @@ const Todos = ({ modalData, taskStatus, notifyTaskStatus }: TodosProps) => {
   return (
     <>
       {todos.length > 0 ? (
-        <ul>
+        <ul className={styles.todoList}>
           {todos.map((data, index) => {
             if (
               !notifyTaskStatus ||
@@ -38,9 +39,21 @@ const Todos = ({ modalData, taskStatus, notifyTaskStatus }: TodosProps) => {
               notifyTaskStatus === "All"
             ) {
               return (
-                <li key={index}>
-                  {data.text} - {data.timestamp} {data.status}{" "}
-                  <button onClick={handleDeleteTask(index)}>Delete</button>
+                <li key={index} className={styles.todoItem}>
+                  <span>
+                    <span className={styles.todoText}>{data.text}</span>
+                    <span className={styles.todoTimestamp}>
+                      {" "}
+                      - {data.timestamp}
+                    </span>
+                    <span className={styles.todoStatus}> {data.status}</span>
+                  </span>
+                  <button
+                    className={styles.deleteButton}
+                    onClick={handleDeleteTask(index)}
+                  >
+                    Delete
+                  </button>
                 </li>
               );
             }
@@ -48,7 +61,7 @@ const Todos = ({ modalData, taskStatus, notifyTaskStatus }: TodosProps) => {
           })}
         </ul>
       ) : (
-        <h2>No todo's</h2>
+        <h2 className={styles.noTodos}>No todo's</h2>
       )}
     </>
   );
