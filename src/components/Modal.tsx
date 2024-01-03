@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../styles/Modal.module.css";
+import { TodoItem } from "./Todos";
 
 interface ModalProps {
   show: boolean;
@@ -7,6 +8,8 @@ interface ModalProps {
   options: string[];
   onModalChange: (value: string) => void;
   onTaskStatusChange: (value: string) => void;
+  isEditClicked: boolean;
+  editData: TodoItem;
 }
 const Modal = ({
   show,
@@ -14,6 +17,8 @@ const Modal = ({
   options,
   onModalChange,
   onTaskStatusChange,
+  isEditClicked,
+  editData,
 }: ModalProps) => {
   const [selectedOption, setSelectedOption] = useState("incomplete");
   const [inputValue, setInputValue] = useState("");
@@ -37,6 +42,18 @@ const Modal = ({
       onClose();
     }
   };
+  const handleEditModal = () => {
+    if (show && isEditClicked) {
+      setInputValue(editData.text);
+      setSelectedOption(editData.status);
+    } else {
+      setInputValue("");
+      setSelectedOption("incomplete");
+    }
+  };
+  useEffect(() => {
+    handleEditModal();
+  }, [isEditClicked]);
   if (!show) {
     return null;
   }
@@ -63,7 +80,9 @@ const Modal = ({
           </select>
         </div>
         <div className={styles.modalFooter}>
-          <button onClick={handlTaskAdding}>Add Task</button>
+          <button onClick={handlTaskAdding}>
+            {isEditClicked ? "Update Task" : "Add Task"}
+          </button>
           <button onClick={onClose}>Cancel</button>
         </div>
       </div>
